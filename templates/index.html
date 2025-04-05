@@ -1,0 +1,3175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeAI Pro | Premium AI Anime Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghibli Style Selection</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --primary-dark: #5a189a;
+            --secondary: #00f5d4;
+            --secondary-dark: #00bb94;
+            --accent: #ff006e;
+            --accent-light: #ff5c8d;
+            --dark: #10002b;
+            --darker: #0a001a;
+            --darkest: #050011;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --medium-gray: #adb5bd;
+            --dark-gray: #495057;
+            
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-light));
+            --gradient-hover: linear-gradient(135deg, var(--primary-light), var(--primary));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-light));
+            
+            --neon-glow: 0 0 10px rgba(138, 43, 226, 0.7), 0 0 20px rgba(138, 43, 226, 0.5);
+            --neon-glow-secondary: 0 0 10px rgba(0, 245, 212, 0.7), 0 0 20px rgba(0, 245, 212, 0.5);
+            --text-glow: 0 0 5px rgba(255, 255, 255, 0.8);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 30px;
+            
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.25);
+            --box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-fast: all 0.15s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-weight: 300;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(to right, var(--secondary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--text-glow);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+            box-shadow: var(--neon-glow);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 35px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-xl);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--neon-glow);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.9), 0 0 25px rgba(138, 43, 226, 0.6);
+            background: var(--gradient-hover);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--neon-glow);
+            border-color: transparent;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            box-shadow: var(--neon-glow-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.7), 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-accent:hover {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(16, 0, 43, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 5px 0;
+            background-color: rgba(10, 0, 26, 0.98);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            transition: var(--transition);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            transition: var(--transition);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+            z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 0, 26, 0.9), rgba(16, 0, 43, 0.8)), url('https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.2) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 245, 212, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .stat-text h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .stat-text p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Particles Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Generator Section */
+        .generator-section {
+            background: linear-gradient(to bottom, var(--darker), var(--dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generator-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .generator-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .generator-preview {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            box-shadow: var(--box-shadow-lg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: var(--transition);
+        }
+
+        .generator-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 245, 212, 0.3);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .preview-action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-action-btn:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 2px dashed rgba(138, 43, 226, 0.3);
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .preview-placeholder {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+        }
+
+        .preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        .preview-placeholder p {
+            font-size: 0.9rem;
+        }
+
+        .preview-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .preview-meta {
+            display: flex;
+            gap: 15px;
+        }
+
+        .preview-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .preview-meta-item i {
+            font-size: 0.8rem;
+        }
+
+        .generator-controls {
+            flex: 1;
+        }
+
+        .control-group {
+            margin-bottom: 30px;
+        }
+
+        .control-group h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .control-group h3 i {
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        .style-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .style-option {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-xl);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .style-option i {
+            font-size: 0.9rem;
+        }
+
+        .style-option:hover, .style-option.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--neon-glow);
+            border-color: transparent;
+        }
+
+        .slider-container {
+            margin-top: 15px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+            box-shadow: -407px 0 0 400px var(--primary-light);
+        }
+
+        .prompt-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            resize: none;
+            height: 120px;
+            margin-top: 10px;
+            color: white;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .prompt-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            background: var(--gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Image Upload Section */
+        .upload-section {
+            background: linear-gradient(to bottom, var(--dark), var(--darker));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 245, 212, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .upload-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .upload-box {
+            flex: 1;
+            border: 2px dashed rgba(138, 43, 226, 0.5);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+        }
+
+        .upload-box:hover {
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .upload-box i {
+            font-size: 3.5rem;
+            color: var(--primary-light);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .upload-box:hover i {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .upload-box h3 {
+            margin-bottom: 15px;
+            color: var(--light);
+            font-size: 1.5rem;
+        }
+
+        .upload-box p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .upload-preview {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+        }
+
+        .upload-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: none;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .convert-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            background: var(--gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: var(--border-radius);
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Anime Showcase Section */
+        .showcase-section {
+            background: var(--darker);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showcase-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .showcase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .showcase-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .showcase-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .showcase-nav-btn:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .showcase-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .showcase-container {
+            position: relative;
+            height: 450px;
+            margin: 50px 0;
+            overflow: hidden;
+        }
+
+        .showcase-track {
+            display: flex;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            gap: 25px;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item {
+            flex: 0 0 300px;
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow-lg);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .showcase-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .showcase-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+        }
+
+        .showcase-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: white;
+            z-index: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .showcase-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .showcase-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .showcase-dot.active {
+            background: var(--primary-light);
+            transform: scale(1.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(to bottom, var(--dark), var(--darker));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 245, 212, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: var(--neon-glow);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(to bottom, var(--darker), var(--dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-xl);
+            padding: 5px;
+            max-width: 400px;
+            margin: 0 auto 40px;
+        }
+
+        .pricing-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .pricing-tab.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--neon-glow);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 50px 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+
+        .pricing-card.popular {
+            border: 1px solid var(--primary-light);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .pricing-card.popular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: var(--border-radius-xl);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: var(--neon-glow);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li i {
+            color: var(--secondary);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(to bottom, var(--dark), var(--darker));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 245, 212, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+
+        .faq-question {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--light);
+            font-size: 1.1rem;
+        }
+
+        .faq-question i {
+            color: var(--primary-light);
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+            color: var(--secondary);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 25px;
+            max-height: 500px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(to bottom, var(--darker), var(--dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .testimonials-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .testimonial-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(138, 43, 226, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 2px solid var(--primary-light);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .testimonials-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary-light);
+            transform: scale(1.2);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, var(--darker), var(--darkest));
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-light), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+            box-shadow: var(--neon-glow);
+        }
+
+        .newsletter-form {
+            margin-top: 20px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: var(--border-radius);
+            color: white;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            border-radius: var(--border-radius);
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: normal;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: var(--border-radius-xl);
+            background: var(--gradient-secondary);
+            color: white;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1400px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .generator-container, .upload-container {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .generator-container, .upload-container {
+                flex-direction: column;
+            }
+            
+            .generator-preview, .upload-box {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .showcase-item {
+                flex: 0 0 250px;
+                height: 350px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding-top: 80px;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .showcase-item {
+                flex: 0 0 180px;
+                height: 250px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-content {
+                padding: 30px 20px;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+    .animated-image-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 20px;
+        perspective: 1200px;
+    }
+
+    .image-container {
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .floating-image {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        transform-style: preserve-3d;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 3px solid white;
+    }
+
+    .floating-animation-1 {
+        animation: floatBounce 4s ease-in-out infinite;
+    }
+
+    .floating-animation-2 {
+        animation: floatBounce 4s ease-in-out 0.5s infinite;
+    }
+
+    @keyframes floatBounce {
+        0%, 100% {
+            transform: translateY(0) rotateX(0deg) scale(1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        50% {
+            transform: translateY(-25px) rotateX(5deg) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+    }
+
+    .image-container:hover .floating-image {
+        transform: translateY(-10px) rotateX(8deg) scale(1.05);
+        box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+
+    .preview-placeholder {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 50px 30px;
+        text-align: center;
+        border-radius: 12px;
+        border: 2px dashed #adb5bd;
+    }
+
+    .preview-placeholder i {
+        font-size: 3.5rem;
+        color: #6c757d;
+        margin-bottom: 20px;
+        opacity: 0.7;
+    }
+
+    .preview-placeholder p {
+        color: #495057;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    
+    /* Style for the Ghibli style selector */
+    .style-selection {
+        margin-top: 30px;
+        text-align: center;
+    }
+    
+    .style-slider {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding: 15px 0;
+        scrollbar-width: thin;
+        scrollbar-color: #888 transparent;
+    }
+    
+    .style-slider::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .style-slider::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+    }
+    
+    .style-option {
+        flex: 0 0 100px;
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.2s;
+        opacity: 0.7;
+    }
+    
+    .style-option.active {
+        opacity: 1;
+        transform: scale(1.1);
+        position: relative;
+    }
+    
+    .style-option.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 25%;
+        width: 50%;
+        height: 3px;
+        background: #ff6b6b;
+        border-radius: 3px;
+    }
+    
+    .style-option img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid transparent;
+    }
+    
+    .style-option.active img {
+        border-color: #ff6b6b;
+    }
+    
+    .style-option span {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+    
+    .style-option.active span {
+        color: #333;
+        font-weight: bold;
+    }
+    
+    .selected-style-name {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+    }
+    .style-option {
+            @apply relative cursor-pointer transition-transform transform hover:scale-110;
+        }
+        .style-option span {
+            @apply absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-lg text-sm;
+        }
+        .style-option img {
+            @apply w-32 h-32 object-cover rounded-lg shadow-lg;
+        }
+        .active {
+            @apply border-4 border-yellow-400;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-robot"></i> Anime<span>AI</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#generator"><i class="fas fa-magic"></i> Generator</a></li>
+                    <li><a href="#upload"><i class="fas fa-exchange-alt"></i> Convert</a></li>
+                    <li><a href="#showcase"><i class="fas fa-images"></i> Showcase</a></li>
+                    <li><a href="#pricing"><i class="fas fa-tags"></i> Pricing</a></li>
+                    <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Create <span class="pulse">Stunning</span> AI Anime Art</h1>
+                <p class="delay-1">Transform your ideas into beautiful anime artwork with our powerful AI generator. No drawing skills required!</p>
+                <div class="hero-btns delay-2">
+                    <a href="#generator" class="btn">Generate Now</a>
+                    <a href="#upload" class="btn btn-outline">Convert Photo</a>
+                </div>
+                <div class="hero-stats delay-3">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3>10M+</h3>
+                            <p>Artworks Generated</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3>500K+</h3>
+                            <p>Happy Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3>Fast</h3>
+                            <p>Under 30 Seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+<section id="generator" class="generator-section">
+    <div class="container">
+        <h2 class="section-title animate">AI Anime Generator</h2>
+        <p class="section-subtitle delay-1">Customize every detail of your anime character and generate unique artwork in seconds</p>
+        
+        <div class="generator-container">
+            <div class="generator-preview delay-2">
+                <div class="preview-actions">
+                    <button class="preview-action-btn tooltip" title="Save to Collection">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="preview-action-btn tooltip" title="Generate New Variation">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                
+                <<div class="animated-image-stack">
+                    <!-- First Image (Profile2) -->
+                    <div class="image-container floating-animation-1">
+                        {% if has_permanent_image %}
+                            <img class="floating-image" src="{{ permanent_image_url }}" alt="Permanent Artwork">
+                        {% else %}
+                            <div class="preview-placeholder">
+                                <i class="fas fa-image"></i>
+                                <p>Your generated artwork will appear here</p>
+                            </div>
+                        {% endif %}
+                    </div>
+            
+                    <!-- Second Image (Profile1) -->
+                    <div class="image-container floating-animation-2">
+                        {% if has_additional_image %}
+                            <img class="floating-image" src="{{ additional_image_url }}" alt="Additional Artwork">
+                        {% else %}
+                            <div class="preview-placeholder">
+                                <i class="fas fa-image"></i>
+                                <p>Your additional artwork will appear here</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="preview-footer">
+                    <div class="preview-meta">
+                        <span class="preview-meta-item">
+                            <i class="fas fa-clock"></i> 12s
+                        </span>
+                        <span class="preview-meta-item">
+                            <i class="fas fa-palette"></i> Shonen
+                        </span>
+                    </div>
+                    <span class="preview-meta-item">
+                        <i class="fas fa-expand"></i> 1024x1024
+                    </span>
+                </div>
+            </div>
+            
+            <div class="generator-controls delay-3">
+                <div class="control-group">
+                    <h3><i class="fas fa-palette"></i> Anime Style</h3>
+                    <div class="style-options">
+                        <div class="style-option active">
+                            <i class="fas fa-fire"></i> Shonen
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-heart"></i> Shojo
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-child"></i> Chibi
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-robot"></i> Mecha
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-star"></i> Kawaii
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3><i class="fas fa-user"></i> Character Details</h3>
+                    <div class="style-options">
+                        <div class="style-option active">
+                            <i class="fas fa-mars"></i> Male
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-venus"></i> Female
+                        </div>
+                        <div class="style-option">
+                            <i class="fas fa-genderless"></i> Non-binary
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3><i class="fas fa-sliders-h"></i> Art Style Intensity</h3>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Subtle</span>
+                            <span>Strong</span>
+                        </div>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="style-slider">
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3><i class="fas fa-comment-alt"></i> Describe Your Character</h3>
+                    <textarea class="prompt-input" placeholder="E.g. 'A brave warrior with blue spiky hair, wearing samurai armor, standing on a mountain peak at sunset'"></textarea>
+                </div>
+                
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                
+                <button class="btn generate-btn" id="generate-btn">
+                    <i class="fas fa-magic"></i> Generate Anime Art
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </section>
+
+    <!-- Image Upload Section -->
+<section id="upload" class="upload-section">
+    <div class="container">
+        <h2 class="section-title animate">Convert Photos to Ghibli Style</h2>
+        <p class="section-subtitle delay-1">Upload your photo and transform it into Studio Ghibli-inspired artwork</p>
+        
+        <div class="upload-container">
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="upload-box delay-2" id="upload-box">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Upload Your Photo</h3>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <input type="file" id="file-input" name="file" accept="image/*" style="display: none;">
+                    <button type="button" class="btn btn-outline" id="select-image-btn">
+                        <i class="fas fa-folder-open"></i> Select Image
+                    </button>
+                    <input type="hidden" name="style" id="selected-style" value="ghibli1">
+                </div>
+            </form>
+            
+            <div class="upload-preview delay-3">
+                <img id="uploaded-image" src="" alt="Uploaded Image">
+                <img id="converted-image" src="" alt="Converted Ghibli Image">
+                <div class="progress-container" id="convert-progress">
+                    <div class="progress-bar" id="convert-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ghibli Style Selection Slider -->
+        <div class="style-selection delay-4">
+            <h3>Choose Your Ghibli Style</h3>
+            <div class="style-slider">
+                <div class="style-option active" data-style="ghibli1" data-name="Kiki's Delivery Service">
+                    <img src="https://cdn.prod.website-files.com/672e2ecfabc225dc52e26a4a/67ee9d08056b64205e8fc867_getimg_ai_img-8x90If15cCvw4t3g7gGzH.webp" alt="Kiki's Delivery Service Style">
+                    <span>Kiki's Style</span>
+                </div>
+                <div class="style-option" data-style="ghibli2" data-name="Spirited Away">
+                    <img src="https://cdn.prod.website-files.com/672e2ecfabc225dc52e26a4a/67ee9a38eae1308e28b8e35c_getimg_ai_img-Y635oK6nQ6l9aXrSUeLB1.webp" alt="Spirited Away Style">
+                    <span>Spirited Away</span>
+                </div>
+                <div class="style-option" data-style="ghibli3" data-name="Howl's Moving Castle">
+                    <img src="https://cdn.prod.website-files.com/672e2ecfabc225dc52e26a4a/67ee95b0c90c9e2b8d1078f0_getimg_ai_img-4i7qYN8POfssmit3Pyl82.webp" alt="Howl's Moving Castle Style">
+                    <span>Howl's Castle</span>
+                </div>
+                <div class="style-option" data-style="ghibli4" data-name="Princess Mononoke">
+                    <img src="https://cdn.prod.website-files.com/672e2ecfabc225dc52e26a4a/67ee99bbfd022b2b3bc6826e_getimg_ai_img-HGoFOdRnZNhDJYIEYUbPX.webp" alt="Princess Mononoke Style">
+                    <span>Mononoke</span>
+                </div>
+                <div class="style-option" data-style="ghibli5" data-name="My Neighbor Totoro">
+                    <img src="https://cdn.prod.website-files.com/672e2ecfabc225dc52e26a4a/67ee96eadf42c3dea5cc3c5d_getimg_ai_img-qNw96fTY9HWniWi4ft9rR.webp" alt="My Neighbor Totoro Style">
+                    <span>Totoro</span>
+                </div>
+                <div class="style-option" data-style="ghibli6" data-name="Ponyo">
+                    <img src="https://www.maison-ghibli.com/img/mdghomecategorypush_categoryblock/2-image.png" alt="Ponyo Style">
+                    <span>Ponyo</span>
+                </div>
+                <div class="style-option" data-style="ghibli7" data-name="The Wind Rises">
+                    <img src="https://ghibli-park.jp/site/img/index/mark02.png" alt="The Wind Rises Style">
+                    <span>Wind Rises</span>
+                </div>
+                <div class="style-option" data-style="ghibli8" data-name="Porco Rosso">
+                    <img src="https://ghibli-park.jp/site/img/index/mark04.png" alt="Porco Rosso Style">
+                    <span>Porco Rosso</span>
+                </div>
+                <div class="style-option" data-style="ghibli9" data-name="Castle in the Sky">
+                    <img src="https://ghibli-park.jp/site/img/index/icon_food.png" alt="Castle in the Sky Style">
+                    <span>Laputa</span>
+                </div>
+                <div class="style-option" data-style="ghibli10" data-name="Arrietty">
+                    <img src="https://ghibli-park.jp/site/img/index/mark01.png" alt="Arrietty Style">
+                    <span>Arrietty</span>
+                </div>
+            </div>
+            <div class="selected-style-name" id="selected-style-name">Selected: Kiki's Delivery Service</div>
+            <button class="btn convert-btn" id="convert-btn" style="display: none;">
+                <i class="fas fa-magic"></i> Convert to Ghibli
+            </button>
+        </div>
+    </div>
+    </section>
+
+    <!-- Anime Showcase Section -->
+<section id="showcase" class="showcase-section">
+    <div class="container">
+        <h2 class="section-title animate">Anime Art Showcase</h2>
+        <p class="section-subtitle delay-1">Browse through our collection of AI-generated anime artwork</p>
+        
+        <div class="showcase-container">
+            <div class="showcase-track" id="showcase-track">
+                <!-- Duplicate items for seamless looping -->
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider17.webp" alt="Anime Art 1">
+                    <div class="showcase-title">Cyber Samurai</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider9.webp" alt="Anime Art 2">
+                    <div class="showcase-title">Magical Girl</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider10.webp" alt="Anime Art 3">
+                    <div class="showcase-title">Steampunk Adventure</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider37.webp" alt="Anime Art 4">
+                    <div class="showcase-title">Fantasy Warrior</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider7.webp" alt="Anime Art 5">
+                    <div class="showcase-title">Neon City</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider14.webp" alt="Anime Art 6">
+                    <div class="showcase-title">Mecha Pilot</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider21.webp" alt="Anime Art 7">
+                    <div class="showcase-title">Dark Sorcerer</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider27.webp" alt="Anime Art 8">
+                    <div class="showcase-title">Celestial Guardian</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider13.webp" alt="Anime Art 9">
+                    <div class="showcase-title">Ninja Assassin</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider32.webp" alt="Anime Art 10">
+                    <div class="showcase-title">Cyberpunk Hacker</div>
+                </div>
+                <!-- Duplicate items for seamless looping -->
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider17.webp" alt="Anime Art 1">
+                    <div class="showcase-title">Cyber Samurai</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider9.webp" alt="Anime Art 2">
+                    <div class="showcase-title">Magical Girl</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider10.webp" alt="Anime Art 3">
+                    <div class="showcase-title">Steampunk Adventure</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider37.webp" alt="Anime Art 4">
+                    <div class="showcase-title">Fantasy Warrior</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider7.webp" alt="Anime Art 5">
+                    <div class="showcase-title">Neon City</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider14.webp" alt="Anime Art 6">
+                    <div class="showcase-title">Mecha Pilot</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider21.webp" alt="Anime Art 7">
+                    <div class="showcase-title">Dark Sorcerer</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider27.webp" alt="Anime Art 8">
+                    <div class="showcase-title">Celestial Guardian</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider13.webp" alt="Anime Art 9">
+                    <div class="showcase-title">Ninja Assassin</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider32.webp" alt="Anime Art 10">
+                    <div class="showcase-title">Cyberpunk Hacker</div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+            <div class="showcase-dots" id="showcase-dots">
+                <div class="showcase-dot active"></div>
+                <div class="showcase-dot"></div>
+                <div class="showcase-dot"></div>
+                <div class="showcase-dot"></div>
+                <div class="showcase-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title animate">Powerful Features</h2>
+            <p class="section-subtitle delay-1">Everything you need to create perfect anime artwork</p>
+            
+            <div class="features-grid">
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Multiple Art Styles</h3>
+                    <p>Choose from various anime styles including Shonen, Shojo, Chibi, and more to match your vision perfectly. Our AI understands the nuances of each style.</p>
+                </div>
+                
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3>Advanced Controls</h3>
+                    <p>Fine-tune every aspect of your character with detailed controls for facial features, outfits, and poses. Get exactly what you envision.</p>
+                </div>
+                
+                <div class="feature-card animate delay-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>High Resolution</h3>
+                    <p>Generate artwork in up to 8K resolution suitable for printing, wallpapers, or professional projects. Crystal clear details every time.</p>
+                </div>
+                
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast Generation</h3>
+                    <p>Get your artwork in seconds with our optimized AI models running on powerful cloud servers. No more waiting for results.</p>
+                </div>
+                
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Unlimited Variations</h3>
+                    <p>Generate multiple variations of your character with different poses, expressions, and outfits. Explore creative possibilities.</p>
+                </div>
+                
+                <div class="feature-card animate delay-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <h3>Easy Download</h3>
+                    <p>Download your creations in PNG or JPG format with transparent background options available. Ready for any project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title animate">Simple Pricing</h2>
+            <p class="section-subtitle delay-1">Choose the plan that works best for your creative needs</p>
+            
+            <div class="pricing-tabs animate delay-2">
+                <div class="pricing-tab active">Monthly</div>
+                <div class="pricing-tab">Yearly <span class="badge">Save 20%</span></div>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card animate delay-3">
+                    <h3>Starter</h3>
+                    <div class="price">$9<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 50 AI Generations per month</li>
+                        <li><i class="fas fa-check"></i> HD Resolution (1080p)</li>
+                        <li><i class="fas fa-check"></i> 5 Anime Styles</li>
+                        <li><i class="fas fa-check"></i> Basic Customization</li>
+                        <li><i class="fas fa-check"></i> Community Gallery Access</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular animate delay-4">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Creator</h3>
+                    <div class="price">$19<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 200 AI Generations per month</li>
+                        <li><i class="fas fa-check"></i> 2K Resolution</li>
+                        <li><i class="fas fa-check"></i> 15 Anime Styles</li>
+                        <li><i class="fas fa-check"></i> Advanced Customization</li>
+                        <li><i class="fas fa-check"></i> Priority Generation</li>
+                        <li><i class="fas fa-check"></i> Commercial License</li>
+                    </ul>
+                    <a href="#" class="btn">Get Started</a>
+                </div>
+                
+                <div class="pricing-card animate delay-3">
+                    <h3>Professional</h3>
+                    <div class="price">$49<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited AI Generations</li>
+                        <li><i class="fas fa-check"></i> 4K Resolution</li>
+                        <li><i class="fas fa-check"></i> All Anime Styles</li>
+                        <li><i class="fas fa-check"></i> Premium Customization</li>
+                        <li><i class="fas fa-check"></i> Instant Generation</li>
+                        <li><i class="fas fa-check"></i> Commercial License</li>
+                        <li><i class="fas fa-check"></i> Private Gallery</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title animate">What Our Users Say</h2>
+            <p class="section-subtitle delay-1">Join thousands of satisfied creators using AnimeAI</p>
+            
+            <div class="testimonials-container delay-2">
+                <div class="testimonials-track" id="testimonials-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">AnimeAI has completely transformed my creative process. As a game developer, I can now generate character concepts in minutes instead of days. The quality is amazing and my players love the unique designs!</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Mark Johnson</h4>
+                                    <p>Game Developer at PixelForge</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">I've tried many AI art generators, but AnimeAI stands out for its anime-specific styles. The character customization options are incredible, and I've been able to create consistent characters for my webcomic series.</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Sarah Chen</h4>
+                                    <p>Webcomic Artist</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">The photo-to-anime conversion is mind-blowing! I've used it to create anime versions of my D&D group, and the results were so good we printed them as posters. The attention to detail in the art styles is phenomenal.</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>David Rodriguez</h4>
+                                    <p>Dungeon Master & Anime Fan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonials-nav" id="testimonials-nav">
+                    <div class="testimonial-dot active"></div>
+                    <div class="testimonial-dot"></div>
+                    <div class="testimonial-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title animate">Frequently Asked Questions</h2>
+            <p class="section-subtitle delay-1">Find answers to common questions about our AI Anime Generator</p>
+            
+            <div class="faq-container">
+                <div class="faq-item animate delay-2">
+                    <div class="faq-question">
+                        <span>How does the AI anime generator work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI anime generator uses state-of-the-art machine learning models trained on millions of anime artworks. The system analyzes your text description and style preferences to generate unique artwork that matches your vision. The more detailed your description, the better the results will be.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item animate delay-3">
+                    <div class="faq-question">
+                        <span>Do I own the rights to the generated artwork?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! With all our paid plans, you own full commercial rights to the artwork you generate. Our free tier is for personal use only. You can use your generated artwork for merchandise, games, books, and other commercial projects without any restrictions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item animate delay-4">
+                    <div class="faq-question">
+                        <span>How long does it take to generate an artwork?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Generation time depends on the resolution and complexity of your request. Most artworks generate in 10-30 seconds. Higher resolution images (4K-8K) may take up to 1-2 minutes. Our Pro users enjoy priority generation with faster speeds and dedicated server resources.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item animate delay-2">
+                    <div class="faq-question">
+                        <span>Can I edit an artwork after it's generated?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! You can make adjustments to your prompt and generate new variations. We also provide an advanced editor where you can make manual adjustments to colors, proportions, and other details after generation. Our Professional plan includes Photoshop-style editing tools.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item animate delay-3">
+                    <div class="faq-question">
+                        <span>Is there a free trial available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! New users get 5 free generations to test the platform. No credit card required. After your free trial, you can choose a subscription plan that fits your needs. We also offer a 30-day money-back guarantee on all paid plans.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content animate delay-2">
+                <h2>Ready to Create Amazing Anime Art?</h2>
+                <p>Join thousands of creators and start generating unique anime artwork today. No experience required!</p>
+                <div class="cta-btns delay-3">
+                    <a href="#generator" class="btn btn-secondary">
+                        <i class="fas fa-magic"></i> Try It Free
+                    </a>
+                    <a href="#pricing" class="btn btn-outline">
+                        <i class="fas fa-crown"></i> See Premium Plans
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column animate delay-2">
+                    <h3>AnimeAI</h3>
+                    <p>Bringing your anime visions to life with the power of artificial intelligence. Create stunning artwork with just a few clicks.</p>
+                    <div class="social-links">
+                        <a href="#" class="tooltip" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="tooltip" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="tooltip" title="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="tooltip" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="tooltip" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column animate delay-3">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column animate delay-4">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column animate delay-2">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column animate delay-3">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new features and special offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom animate delay-4">
+                <p>&copy; 2023 AnimeAI. All rights reserved. Powered by advanced AI technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random properties
+            const size = Math.random() * 5 + 2;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 15;
+            const duration = Math.random() * 10 + 10;
+            const opacity = Math.random() * 0.5 + 0.1;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${posX}%`;
+            particle.style.top = `${posY}%`;
+            particle.style.animationDelay = `${delay}s`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.opacity = opacity;
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // Style Option Selection
+        const styleOptions = document.querySelectorAll('.style-option');
+        styleOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from siblings
+                option.parentNode.querySelectorAll('.style-option').forEach(sibling => {
+                    sibling.classList.remove('active');
+                });
+                // Add active class to clicked option
+                option.classList.add('active');
+            });
+        });
+
+        // Pricing Tabs
+        const pricingTabs = document.querySelectorAll('.pricing-tab');
+        pricingTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                pricingTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update prices based on selected tab
+                const prices = document.querySelectorAll('.price');
+                if (tab.textContent.includes('Yearly')) {
+                    prices[0].innerHTML = '$90<span>/year</span>';
+                    prices[1].innerHTML = '$180<span>/year</span>';
+                    prices[2].innerHTML = '$470<span>/year</span>';
+                } else {
+                    prices[0].innerHTML = '$9<span>/month</span>';
+                    prices[1].innerHTML = '$19<span>/month</span>';
+                    prices[2].innerHTML = '$49<span>/month</span>';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Style selection
+        const styleOptions = document.querySelectorAll('.style-option');
+        const selectedStyleInput = document.getElementById('selected-style');
+        const selectedStyleName = document.getElementById('selected-style-name');
+        
+        styleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                styleOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // Add active class to clicked option
+                this.classList.add('active');
+                
+                // Update hidden input value
+                const style = this.getAttribute('data-style');
+                selectedStyleInput.value = style;
+                
+                // Update displayed style name
+                const styleName = this.getAttribute('data-name');
+                selectedStyleName.textContent = `Selected: ${styleName}`;
+                
+                // Show convert button if image is uploaded
+                const uploadedImage = document.getElementById('uploaded-image');
+                if (uploadedImage.src) {
+                    document.getElementById('convert-btn').style.display = 'block';
+                }
+            });
+        });
+
+        // Image Upload and Conversion Functionality
+        const uploadBox = document.getElementById('upload-box');
+        const fileInput = document.getElementById('file-input');
+        const selectImageBtn = document.getElementById('select-image-btn');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const convertedImage = document.getElementById('converted-image');
+        const convertBtn = document.getElementById('convert-btn');
+        const uploadForm = document.getElementById('upload-form');
+        const selectedStyle = document.getElementById('selected-style');
+        const convertProgress = document.getElementById('convert-progress');
+        const convertProgressBar = document.getElementById('convert-progress-bar');
+
+        // Click on the upload box or select image button to trigger file input
+        uploadBox.addEventListener('click', (e) => {
+            // Don't trigger if clicking on the button (let button handle it)
+            if (!selectImageBtn.contains(e.target)) {
+                fileInput.click();
+            }
+        });
+
+        selectImageBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the upload box click event
+            fileInput.click();
+        });
+
+        // Handle drag and drop
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.style.borderColor = 'var(--secondary)';
+            uploadBox.style.backgroundColor = 'rgba(0, 245, 212, 0.1)';
+        });
+
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
+            uploadBox.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+        });
+
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
+            uploadBox.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileUpload(fileInput.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        function handleFileUpload(file) {
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    uploadedImage.src = event.target.result;
+                    uploadedImage.style.display = 'block';
+                    
+                    // Show convert button if a style is already selected
+                    const activeStyle = document.querySelector('.style-option.active');
+                    if (activeStyle) {
+                        convertBtn.style.display = 'block';
+                    }
+                    
+                    convertedImage.style.display = 'none';
+                    convertProgress.style.display = 'none';
+                    
+                    // Animate upload box
+                    const originalContent = uploadBox.innerHTML;
+                    uploadBox.innerHTML = '<i class="fas fa-check-circle"></i><h3>Upload Successful</h3>';
+                    uploadBox.style.borderColor = 'var(--secondary)';
+                    setTimeout(() => {
+                        uploadBox.innerHTML = originalContent;
+                        uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
+                    }, 2000);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Convert to Ghibli Style
+        convertBtn.addEventListener('click', async () => {
+            if (!fileInput.files.length) return;
+            
+            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            convertBtn.disabled = true;
+            convertProgress.style.display = 'block';
+            convertProgressBar.style.width = '0%';
+            
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    convertProgressBar.style.width = '100%';
+                    
+                    // After "conversion", show the result
+                    setTimeout(() => {
+                        convertedImage.style.display = 'block';
+                        convertBtn.innerHTML = '<i class="fas fa-magic"></i> Convert to Ghibli';
+                        convertBtn.disabled = false;
+                        convertProgress.style.display = 'none';
+                    }, 500);
+                } else {
+                    convertProgressBar.style.width = `${progress}%`;
+                }
+            }, 200);
+            
+            // In a real implementation, you would use the following code to send to your backend:
+            try {
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                formData.append('style', selectedStyle.value);
+                
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Conversion failed');
+                }
+                
+                const data = await response.json();
+                convertedImage.src = data.preview || data.result;
+                convertedImage.style.display = 'block';
+                
+                // Add success animation
+                convertedImage.style.animation = 'fadeIn 1s ease';
+                setTimeout(() => {
+                    convertedImage.style.animation = '';
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert(`Failed to convert image: ${error.message}`);
+            } finally {
+                convertBtn.innerHTML = '<i class="fas fa-magic"></i> Convert to Ghibli';
+                convertBtn.disabled = false;
+                convertProgress.style.display = 'none';
+            }
+        });
+    });
+
+        // Generate Button Animation
+        const generateBtn = document.getElementById('generate-btn');
+        const previewImage = document.getElementById('generated-image');
+        const previewPlaceholder = document.querySelector('.preview-placeholder');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+
+        generateBtn.addEventListener('click', () => {
+            // Show loading state
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            generateBtn.disabled = true;
+            progressContainer.style.display = 'block';
+            
+            // Simulate generation time with progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Hide placeholder and show generated image
+                    previewPlaceholder.style.display = 'none';
+                    previewImage.src = 'https://cdn.web.imagine.art/imagine-frontend/assets/images/RowImageSlider9.webp';
+                    previewImage.style.display = 'block';
+                    
+                    // Add success animation
+                    previewImage.style.animation = 'fadeIn 1s ease';
+                    setTimeout(() => {
+                        previewImage.style.animation = '';
+                    }, 1000);
+                    
+                    // Reset button
+                    generateBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Anime Art';
+                    generateBtn.disabled = false;
+                    progressContainer.style.display = 'none';
+                }
+            }, 200);
+        });
+
+        
+    // Showcase Auto-Slider
+    const showcaseTrack = document.getElementById('showcase-track');
+    const showcaseItems = document.querySelectorAll('.showcase-item');
+    const itemWidth = showcaseItems[0].offsetWidth + 25; // 25px gap
+    let currentPosition = 0;
+    const speed = 1; // Pixels per frame (adjust for speed)
+    const totalWidth = itemWidth * showcaseItems.length / 2; // Half because we duplicated items
+    
+    // Clone items for infinite loop
+    function cloneItems() {
+        const items = document.querySelectorAll('.showcase-item');
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            showcaseTrack.appendChild(clone);
+        });
+    }
+    
+    // Animation loop
+    function animateShowcase() {
+        currentPosition -= speed;
+        
+        // Reset position when we've scrolled all items
+        if (currentPosition <= -totalWidth) {
+            currentPosition = 0;
+        }
+        
+        showcaseTrack.style.transform = `translateX(${currentPosition}px)`;
+        requestAnimationFrame(animateShowcase);
+    }
+    
+    // Start animation
+    animateShowcase();
+    
+    // Pause on hover
+    showcaseTrack.addEventListener('mouseenter', () => {
+        speed = 0;
+    });
+    
+    showcaseTrack.addEventListener('mouseleave', () => {
+        speed = 1;
+    });
+
+        
+        let currentSlide = 0;
+        const slideWidth = showcaseItems[0].offsetWidth + 25; // 25px gap
+        
+        function updateShowcase() {
+            showcaseTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            
+            // Update dots
+            showcaseDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Disable/enable navigation buttons
+            showcasePrev.disabled = currentSlide === 0;
+            showcaseNext.disabled = currentSlide === showcaseDots.length - 1;
+        }
+        
+        showcasePrev.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateShowcase();
+            }
+        });
+        
+        showcaseNext.addEventListener('click', () => {
+            if (currentSlide < showcaseDots.length - 1) {
+                currentSlide++;
+                updateShowcase();
+            }
+        });
+        
+        // Click on dots to navigate
+        showcaseDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateShowcase();
+            });
+        });
+        
+        // Initialize
+        updateShowcase();
+
+        // Testimonials Slider
+        const testimonialsTrack = document.getElementById('testimonials-track');
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        
+        let currentTestimonial = 0;
+        const testimonialWidth = testimonialCards[0].offsetWidth;
+        
+        function updateTestimonials() {
+            testimonialsTrack.style.transform = `translateX(-${currentTestimonial * testimonialWidth}px)`;
+            
+            // Update dots
+            testimonialDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentTestimonial);
+            });
+        }
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            updateTestimonials();
+        }, 5000);
+        
+        // Click on dots to navigate
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentTestimonial = index;
+                updateTestimonials();
+            });
+        });
+        
+        // Initialize
+        updateTestimonials();
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Scroll Animation
+        const animateElements = document.querySelectorAll('.animate');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initial check
+        checkScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+        });
+
+        // Add ripple effect to buttons
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
