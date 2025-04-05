@@ -2745,183 +2745,118 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-        // Style selection
-        const styleOptions = document.querySelectorAll('.style-option');
-        const selectedStyleInput = document.getElementById('selected-style');
-        const selectedStyleName = document.getElementById('selected-style-name');
-        
-        styleOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove active class from all options
-                styleOptions.forEach(opt => opt.classList.remove('active'));
-                
-                // Add active class to clicked option
-                this.classList.add('active');
-                
-                // Update hidden input value
-                const style = this.getAttribute('data-style');
-                selectedStyleInput.value = style;
-                
-                // Update displayed style name
-                const styleName = this.getAttribute('data-name');
-                selectedStyleName.textContent = `Selected: ${styleName}`;
-                
-                // Show convert button if image is uploaded
-                const uploadedImage = document.getElementById('uploaded-image');
-                if (uploadedImage.src) {
-                    document.getElementById('convert-btn').style.display = 'block';
-                }
-            });
-        });
-
-        // Image Upload and Conversion Functionality
-        const uploadBox = document.getElementById('upload-box');
-        const fileInput = document.getElementById('file-input');
-        const selectImageBtn = document.getElementById('select-image-btn');
-        const uploadedImage = document.getElementById('uploaded-image');
-        const convertedImage = document.getElementById('converted-image');
-        const convertBtn = document.getElementById('convert-btn');
-        const uploadForm = document.getElementById('upload-form');
-        const selectedStyle = document.getElementById('selected-style');
-        const convertProgress = document.getElementById('convert-progress');
-        const convertProgressBar = document.getElementById('convert-progress-bar');
-
-        // Click on the upload box or select image button to trigger file input
-        uploadBox.addEventListener('click', (e) => {
-            // Don't trigger if clicking on the button (let button handle it)
-            if (!selectImageBtn.contains(e.target)) {
-                fileInput.click();
-            }
-        });
-
-        selectImageBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent the upload box click event
-            fileInput.click();
-        });
-
-        // Handle drag and drop
-        uploadBox.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadBox.style.borderColor = 'var(--secondary)';
-            uploadBox.style.backgroundColor = 'rgba(0, 245, 212, 0.1)';
-        });
-
-        uploadBox.addEventListener('dragleave', () => {
-            uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
-            uploadBox.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-        });
-
-        uploadBox.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
-            uploadBox.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-            
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileUpload(fileInput.files[0]);
-            }
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) {
-                handleFileUpload(e.target.files[0]);
-            }
-        });
-
-        function handleFileUpload(file) {
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    uploadedImage.src = event.target.result;
-                    uploadedImage.style.display = 'block';
-                    
-                    // Show convert button if a style is already selected
-                    const activeStyle = document.querySelector('.style-option.active');
-                    if (activeStyle) {
-                        convertBtn.style.display = 'block';
-                    }
-                    
-                    convertedImage.style.display = 'none';
-                    convertProgress.style.display = 'none';
-                    
-                    // Animate upload box
-                    const originalContent = uploadBox.innerHTML;
-                    uploadBox.innerHTML = '<i class="fas fa-check-circle"></i><h3>Upload Successful</h3>';
-                    uploadBox.style.borderColor = 'var(--secondary)';
-                    setTimeout(() => {
-                        uploadBox.innerHTML = originalContent;
-                        uploadBox.style.borderColor = 'rgba(138, 43, 226, 0.5)';
-                    }, 2000);
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Convert to Ghibli Style
-        convertBtn.addEventListener('click', async () => {
-            if (!fileInput.files.length) return;
-            
-            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
-            convertBtn.disabled = true;
-            convertProgress.style.display = 'block';
-            convertProgressBar.style.width = '0%';
-            
-            // Simulate progress
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += 5;
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    convertProgressBar.style.width = '100%';
-                    
-                    // After "conversion", show the result
-                    setTimeout(() => {
-                        convertedImage.style.display = 'block';
-                        convertBtn.innerHTML = '<i class="fas fa-magic"></i> Convert to Ghibli';
-                        convertBtn.disabled = false;
-                        convertProgress.style.display = 'none';
-                    }, 500);
-                } else {
-                    convertProgressBar.style.width = `${progress}%`;
-                }
-            }, 200);
-            
-            // In a real implementation, you would use the following code to send to your backend:
-            try {
-                const formData = new FormData();
-                formData.append('file', fileInput.files[0]);
-                formData.append('style', selectedStyle.value);
-                
-                const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Conversion failed');
-                }
-                
-                const data = await response.json();
-                convertedImage.src = data.preview || data.result;
-                convertedImage.style.display = 'block';
-                
-                // Add success animation
-                convertedImage.style.animation = 'fadeIn 1s ease';
-                setTimeout(() => {
-                    convertedImage.style.animation = '';
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Conversion error:', error);
-                alert(`Failed to convert image: ${error.message}`);
-            } finally {
-                convertBtn.innerHTML = '<i class="fas fa-magic"></i> Convert to Ghibli';
-                convertBtn.disabled = false;
-                convertProgress.style.display = 'none';
-            }
-        });
+    const styleOptions = document.querySelectorAll('.style-option');
+    const selectedStyleInput = document.getElementById('selected-style');
+    const selectedStyleName = document.getElementById('selected-style-name');
+    styleOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        styleOptions.forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        selectedStyleInput.value = this.getAttribute('data-style');
+        selectedStyleName.textContent = `Selected: ${this.getAttribute('data-name')}`;
+        if (uploadedImage.src) document.getElementById('convert-btn').style.display = 'block';
+      });
     });
+
+    const uploadBox = document.getElementById('upload-box');
+    const fileInput = document.getElementById('file-input');
+    const selectImageBtn = document.getElementById('select-image-btn');
+    const uploadedImage = document.getElementById('uploaded-image');
+    const convertedImage = document.getElementById('converted-image');
+    const convertBtn = document.getElementById('convert-btn');
+    const selectedStyle = document.getElementById('selected-style');
+    const convertProgress = document.getElementById('convert-progress');
+    const convertProgressBar = document.getElementById('convert-progress-bar');
+
+    uploadBox.addEventListener('click', (e) => {
+      if (!selectImageBtn.contains(e.target)) fileInput.click();
+    });
+    selectImageBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); fileInput.click();
+    });
+    uploadBox.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadBox.style.borderColor = 'var(--secondary)';
+    });
+    uploadBox.addEventListener('dragleave', () => {
+      uploadBox.style.borderColor = '#8a2be2';
+    });
+    uploadBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        handleFileUpload(fileInput.files[0]);
+      }
+    });
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) handleFileUpload(e.target.files[0]);
+    });
+
+    function handleFileUpload(file) {
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          uploadedImage.src = event.target.result;
+          uploadedImage.style.display = 'block';
+          if (document.querySelector('.style-option.active')) convertBtn.style.display = 'block';
+          convertedImage.style.display = 'none';
+          convertProgress.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    convertBtn.addEventListener('click', async () => {
+      if (!fileInput.files.length) return;
+      convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+      convertBtn.disabled = true;
+      convertProgress.style.display = 'block';
+      convertProgressBar.style.width = '0%';
+
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += 5;
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+          convertProgressBar.style.width = '100%';
+        } else {
+          convertProgressBar.style.width = `${progress}%`;
+        }
+      }, 200);
+
+      try {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('style', selectedStyle.value);
+
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        try {
+          const data = JSON.parse(text);
+          if (data.result || data.preview) {
+            convertedImage.src = data.result || data.preview;
+            convertedImage.style.display = 'block';
+          } else {
+            throw new Error('No image result in response');
+          }
+        } catch (e) {
+          console.error("Server did not return valid JSON. Raw response:", text);
+          alert('Server Error: Invalid response from backend');
+        }
+      } catch (error) {
+        console.error('Conversion error:', error);
+        alert(`Failed to convert image: ${error.message}`);
+      } finally {
+        convertBtn.innerHTML = '<i class="fas fa-magic"></i> Convert to Ghibli';
+        convertBtn.disabled = false;
+        convertProgress.style.display = 'none';
+      }
+    });
+  });
 
         // Generate Button Animation
         const generateBtn = document.getElementById('generate-btn');
