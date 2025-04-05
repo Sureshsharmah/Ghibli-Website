@@ -8,6 +8,7 @@ from flask_cors import CORS
 import base64
 import onnxruntime
 from PIL import Image, ImageEnhance
+import os
 
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
@@ -18,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['RESULT_FOLDER'] = 'static/results'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'webp'}
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
-app.config['MODEL_PATH'] = r"C:\Users\user\Downloads\model\model\AnimeGANv2_Hayao.onnx"
+app.config['MODEL_PATH'] = os.path.join("model", "AnimeGANv2_Hayao.onnx")
 
 # Create folders if they don't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
