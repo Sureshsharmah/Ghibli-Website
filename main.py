@@ -8,8 +8,6 @@ from flask_cors import CORS
 import base64
 import onnxruntime
 from PIL import Image, ImageEnhance
-import os
-
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)
@@ -56,16 +54,14 @@ def postprocess_image(output):
         if output.shape[0] == 3:
             output = np.transpose(output, (1, 2, 0))
         output = (output * 255).clip(0, 255).astype(np.uint8)
-        
+
         # Convert to PIL for further enhancement
         output_img = Image.fromarray(output)
-        
-        # Improve sharpness and contrast for a cleaner cartoon effect
-        enhancer = ImageEnhance.Sharpness(output_img)
-        output_img = enhancer.enhance(2.0)  # Increase sharpness
-        enhancer = ImageEnhance.Contrast(output_img)
-        output_img = enhancer.enhance(1.5)  # Increase contrast
-        
+
+        # Enhance sharpness and contrast
+        output_img = ImageEnhance.Sharpness(output_img).enhance(2.0)
+        output_img = ImageEnhance.Contrast(output_img).enhance(1.5)
+
         return np.array(output_img)
     except Exception as e:
         print(f"Error in postprocessing: {e}")
@@ -98,8 +94,8 @@ def index():
     additional_image_url = url_for('static', filename=f'results/{additional_image}') if os.path.exists(additional_image_path) else None
 
     return render_template(
-        'index.html', 
-        permanent_image_url=permanent_image_url, 
+        'index.html',
+        permanent_image_url=permanent_image_url,
         has_permanent_image=permanent_image_url is not None,
         additional_image_url=additional_image_url,
         has_additional_image=additional_image_url is not None
@@ -108,58 +104,57 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return jsonify({'error': 'No file part', 'status': 'error'}), 400
-    
+        response = jsonify({'error': 'No file part', 'status': 'error'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 400
+
     file = request.files['file']
     if file.filename == '':
-        return jsonify({'error': 'No selected file', 'status': 'error'}), 400
-    
+        response = jsonify({'error': 'No selected file', 'status': 'error'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 400
+
     if not allowed_file(file.filename):
-        return jsonify({'error': 'File type not allowed', 'status': 'error'}), 400
-    
+        response = jsonify({'error': 'File type not allowed', 'status': 'error'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 400
+
     try:
-        # Ensure upload folder exists
-        if not os.path.exists(app.config['UPLOAD_FOLDER']):
-            os.makedirs(app.config['UPLOAD_FOLDER'])
-        
-        # Ensure results folder exists
-        if not os.path.exists(app.config['RESULT_FOLDER']):
-            os.makedirs(app.config['RESULT_FOLDER'])
-        
         filename = f"{uuid.uuid4().hex[:10]}_{secure_filename(file.filename)}"
         input_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(input_path)
-        
+
         output_filename = f"ghibli_{filename}"
         output_path = os.path.join(app.config['RESULT_FOLDER'], output_filename)
-        
+
         success = apply_ghibli_style(input_path, output_path)
         if not success:
-            return jsonify({'error': 'Failed to process image', 'status': 'error'}), 500
-        
-        # Read the result image
+            response = jsonify({'error': 'Failed to process image', 'status': 'error'})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response, 500
+
+        # Read and encode image
         with open(output_path, 'rb') as f:
             result_data = f.read()
         result_base64 = base64.b64encode(result_data).decode('utf-8')
-        
-        # Return proper JSON response
+
         response = jsonify({
             'status': 'success',
             'original': f"/static/uploads/{filename}",
             'result': f"/static/results/{output_filename}",
             'preview': f"data:image/jpeg;base64,{result_base64}"
         })
-        
-        # Add CORS headers
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
-        
+
     except Exception as e:
         print(f"Error processing file: {str(e)}")
-        return jsonify({
-            'error': f'Failed to process image: {str(e)}', 
+        response = jsonify({
+            'error': f'Failed to process image: {str(e)}',
             'status': 'error'
-        }), 500
+        })
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 500
 
 @app.route('/static/<path:filename>')
 def static_files(filename):
